@@ -21,5 +21,6 @@ target_link_libraries(toolboxcore PUBLIC Qt6::Core Qt6::Network)
 
 add_executable(toolboxd
   src/cli/main.cpp
+  src/web/web.qrc
 )
 target_link_libraries(toolboxd PRIVATE toolboxcore)

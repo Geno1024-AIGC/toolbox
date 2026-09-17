@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toolbox</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <span class="logo" id="logo">◧</span>
+    <div>
+      <h1>Toolbox</h1>
+      <p class="sub">所有工具的统一入口 · <span id="server-host"></span></p>
+    </div>
+  </div>
+  <div class="toolbar">
+    <span id="status-text" class="muted">载入中…</span>
+  </div>
+</header>
+
+<div class="filters" id="filters"></div>
+
+<main id="groups"></main>
+
+<footer class="muted">
+  Toolbox · 服务端根目录 <code id="server-root"></code>
+</footer>
+
+<!-- tool detail / docs modal -->
+<div class="modal-backdrop" id="modal-backdrop" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="modal-title"></h2>
+      <button class="ghost" id="modal-close" title="关闭">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
