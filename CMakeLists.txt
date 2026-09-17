@@ -9,7 +9,14 @@ set(CMAKE_AUTOUIC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Network Widgets)
 
+add_library(toolboxcore STATIC
+  src/core/tool.cpp
+  src/core/manifest.cpp
+)
+target_include_directories(toolboxcore PUBLIC src)
+target_link_libraries(toolboxcore PUBLIC Qt6::Core Qt6::Network)
+
 add_executable(toolboxd
   src/cli/main.cpp
 )
-target_link_libraries(toolboxd PRIVATE Qt6::Core Qt6::Network)
+target_link_libraries(toolboxd PRIVATE toolboxcore)

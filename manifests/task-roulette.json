@@ -1,0 +1,12 @@
+{
+    "id": "task-roulette",
+    "name": "Task Roulette",
+    "category": "生活",
+    "type": "service",
+    "summary": "每天随机挑一个项目来开发",
+    "repo": "../task-roulette",
+    "command": ["bin/task-roulette-linux-amd64"],
+    "port": 29810,
+    "healthPath": "/",
+    "docs": "docs/task-roulette.md"
+}
