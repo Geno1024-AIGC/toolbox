@@ -1,9 +1,13 @@
 #include "core/manifest.h"
 #include "core/tool.h"
+#include "core/http_server.h"
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QHostAddress>
 #include <QTextStream>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 static void usage(QTextStream &out)
 {
@@ -61,7 +65,37 @@ int main(int argc, char *argv[])
         return list ? 0 : 0;
     }
 
+    if (daemon) {
+        HttpServer http;
+        if (!http.listen(29811, QHostAddress::Any)) {
+            QTextStream err(stderr);
+            err << "failed to listen on 29811: " << http.errorString() << Qt::endl;
+            return 1;
+        }
+        http.setHandler([](const HttpRequest &req, HttpResponse *resp) {
+            if (req.path == QLatin1String("/api/ping")) {
+                QJsonObject o;
+                o.insert("ok", true);
+                o.insert("version", QCoreApplication::applicationVersion());
+                resp->contentType = QByteArrayLiteral("application/json");
+                resp->body = QJsonDocument(o).toJson(QJsonDocument::Compact);
+                return true;
+            }
+            if (req.path == QLatin1String("/")) {
+                resp->contentType = QByteArrayLiteral("text/plain; charset=utf-8");
+                resp->body = "toolboxd at your service\n";
+                return true;
+            }
+            return false;
+        });
+
+        QTextStream out(stdout);
+        out << "toolboxd listening on " << QHostAddress(QHostAddress::LocalHost).toString()
+            << " and LAN at http://localhost:29811\n";
+        return app.exec();
+    }
+
     QTextStream err(stderr);
-    err << "daemon / gui modes are not implemented yet" << Qt::endl;
+    err << "gui mode is not implemented yet" << Qt::endl;
     return 0;
 }
