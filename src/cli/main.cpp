@@ -2,13 +2,12 @@
 #include "core/tool.h"
 #include "core/http_server.h"
 #include "core/process_manager.h"
+#include "core/api_server.h"
 
 #include <QCoreApplication>
 #include <QDir>
 #include <QHostAddress>
 #include <QTextStream>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QTimer>
 #include <QEventLoop>
 
@@ -136,31 +135,29 @@ int main(int argc, char *argv[])
     }
 
     if (daemon) {
+        ManifestLoader loader;
+        if (!loader.load(root, QStringLiteral("manifests"))) {
+            QTextStream err(stderr);
+            err << loader.error() << Qt::endl;
+            return 1;
+        }
+        ProcessManager pm;
+        ApiServer api;
+        api.setData(loader.tools(), &pm);
+        api.setRepoRoot(root);
+
         HttpServer http;
+        http.setHandler([&api](const HttpRequest &req, HttpResponse *resp) {
+            return api.route(req, resp);
+        });
         if (!http.listen(29811, QHostAddress::Any)) {
             QTextStream err(stderr);
             err << "failed to listen on 29811: " << http.errorString() << Qt::endl;
             return 1;
         }
-        http.setHandler([](const HttpRequest &req, HttpResponse *resp) {
-            if (req.path == QLatin1String("/api/ping")) {
-                QJsonObject o;
-                o.insert("ok", true);
-                o.insert("version", QCoreApplication::applicationVersion());
-                resp->contentType = QByteArrayLiteral("application/json");
-                resp->body = QJsonDocument(o).toJson(QJsonDocument::Compact);
-                return true;
-            }
-            if (req.path == QLatin1String("/")) {
-                resp->contentType = QByteArrayLiteral("text/plain; charset=utf-8");
-                resp->body = "toolboxd at your service\n";
-                return true;
-            }
-            return false;
-        });
 
         QTextStream out(stdout);
-        out << "toolboxd listening on :29811 (web UI + REST)\n";
+        out << "toolboxd ready at http://localhost:29811 (REST + web UI)\n";
         return app.exec();
     }
 

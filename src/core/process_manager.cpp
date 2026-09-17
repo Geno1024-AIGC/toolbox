@@ -9,7 +9,7 @@ ProcessManager::ProcessManager(QObject *parent)
     : QObject(parent)
 {
     m_probeTimer = new QTimer(this);
-    m_probeTimer->setInterval(5000);
+    m_probeTimer->setInterval(2000);
     connect(m_probeTimer, &QTimer::timeout, this, [this]() {
         for (auto it = m_entries.begin(); it != m_entries.end(); ++it) {
             Entry &e = it.value();
@@ -91,12 +91,16 @@ void ProcessManager::start(const Tool &tool)
     connect(proc, &QProcess::started, this, [this, id = tool.id]() {
         m_entries[id].state = ToolState::Running;
         m_entries[id].lastError.clear();
-        probe(m_entries[id]);
+        // The port may not be bound yet; probe again shortly after start.
+        QTimer::singleShot(300, this, [this, id] { probe(m_entries[id]); });
+        QTimer::singleShot(1500, this, [this, id] { probe(m_entries[id]); });
         emit changed(id);
     });
     connect(proc, &QProcess::errorOccurred, this, [this, id = tool.id](QProcess::ProcessError err) {
         Entry &e = m_entries[id];
         if (err == QProcess::FailedToStart || err == QProcess::Crashed) {
+            if (e.stopping && err == QProcess::Crashed)
+                return; // deliberate termination; finished() will tidy up
             e.state = ToolState::Failed;
             e.lastError = e.proc && err == QProcess::FailedToStart
                 ? QStringLiteral("failed to start: %1").arg(e.proc->errorString())
@@ -155,7 +159,9 @@ void ProcessManager::stopAll()
 
 void ProcessManager::probe(Entry &entry)
 {
-    if (entry.tool.type != ToolType::Service || entry.tool.port <= 0) {
+    // Only probe tools that are actually running under our management.
+    if (entry.state != ToolState::Running || entry.tool.type != ToolType::Service
+        || entry.tool.port <= 0) {
         entry.portOpen = false;
         return;
     }

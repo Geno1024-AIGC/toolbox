@@ -14,6 +14,7 @@ add_library(toolboxcore STATIC
   src/core/manifest.cpp
   src/core/http_server.cpp
   src/core/process_manager.cpp
+  src/core/api_server.cpp
 )
 target_include_directories(toolboxcore PUBLIC src)
 target_link_libraries(toolboxcore PUBLIC Qt6::Core Qt6::Network)
