@@ -24,3 +24,8 @@ add_executable(toolboxd
   src/web/web.qrc
 )
 target_link_libraries(toolboxd PRIVATE toolboxcore)
+
+add_executable(toolbox
+  src/gui/main.cpp
+)
+target_link_libraries(toolbox PRIVATE toolboxcore Qt6::Widgets)
