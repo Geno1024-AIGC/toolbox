@@ -1,0 +1,12 @@
+{
+    "id": "gits-android",
+    "name": "Gits for Android",
+    "category": "移动",
+    "type": "android",
+    "summary": "Git 能力的 Android 客户端，含 OpenPGP 支持",
+    "repo": "../gits-android",
+    "command": ["./gradlew", "assembleDebug"],
+    "managed": false,
+    "docs": "docs/gits-android.md",
+    "note": "包名 g.gits.android；需先构建再安装到设备"
+}

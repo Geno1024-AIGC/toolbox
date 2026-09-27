@@ -1,0 +1,13 @@
+{
+    "id": "proxied-crawler",
+    "name": "Proxied Crawler",
+    "category": "运维",
+    "type": "service",
+    "summary": "正向代理式爬虫，拦截 HTTP(S) 响应正文并按 URL 存成文件",
+    "repo": "../proxied-crawler",
+    "command": ["bin/proxied-crawler-linux-amd64"],
+    "port": 8088,
+    "healthPath": "/",
+    "docs": "docs/proxied-crawler.md",
+    "note": "GUI 面板在 8088，代理监听端口默认 8080"
+}

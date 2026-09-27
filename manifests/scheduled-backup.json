@@ -1,0 +1,12 @@
+{
+    "id": "scheduled-backup",
+    "name": "Scheduled Backup",
+    "category": "工具",
+    "type": "desktop",
+    "summary": "基于 Git 的轻量桌面备份客户端，定时提交推送到私有仓库",
+    "repo": "../scheduled-backup",
+    "command": ["build/scheduled-backup"],
+    "managed": false,
+    "docs": "docs/scheduled-backup.md",
+    "note": "首次使用需选择 GitHub 或 Gitee 并创建私有仓库"
+}

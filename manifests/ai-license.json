@@ -1,0 +1,11 @@
+{
+    "id": "ai-license",
+    "name": "AI 开源许可证",
+    "category": "文档",
+    "type": "document",
+    "summary": "面向人工智能生成项目的开源许可证与使用说明",
+    "repo": "../ai-license",
+    "managed": false,
+    "docs": "docs/ai-license.md",
+    "note": "非可运行软件，仅供查阅；完整条款见仓库 LICENSE"
+}

@@ -1,0 +1,11 @@
+{
+    "id": "whwd",
+    "name": "whwd",
+    "category": "文档",
+    "type": "document",
+    "summary": "类 mhwd 的 Windows 驱动检查与安装工具说明",
+    "repo": "../whwd",
+    "managed": false,
+    "docs": "docs/whwd.md",
+    "note": "面向 Windows 平台，本机为 Linux 无法直接运行"
+}

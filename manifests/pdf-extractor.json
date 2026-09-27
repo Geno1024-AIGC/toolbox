@@ -1,0 +1,12 @@
+{
+    "id": "pdf-extractor",
+    "name": "PDF Extractor",
+    "category": "工具",
+    "type": "desktop",
+    "summary": "C++17 + Qt 5 的 PDF 解析提取工具，GUI 与命令行双模式",
+    "repo": "../pdf-extractor",
+    "command": ["build/pdfx"],
+    "managed": false,
+    "docs": "docs/pdf-extractor.md",
+    "note": "需先执行 build.sh 构建；桌面应用以分离方式启动，不受 Toolbox 托管"
+}

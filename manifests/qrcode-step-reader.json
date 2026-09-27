@@ -1,0 +1,12 @@
+{
+    "id": "qrcode-step-reader",
+    "name": "QR Code Step Reader",
+    "category": "移动",
+    "type": "android",
+    "summary": "二维码分步阅读器，识别二维码并按步骤呈现内容",
+    "repo": "../qrcode-step-reader",
+    "command": ["./gradlew", "assembleDebug"],
+    "managed": false,
+    "docs": "docs/qrcode-step-reader.md",
+    "note": "Compose Multiplatform 项目，需先构建再安装到设备"
+}

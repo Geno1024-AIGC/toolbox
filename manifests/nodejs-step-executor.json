@@ -1,0 +1,11 @@
+{
+    "id": "nodejs-step-executor",
+    "name": "Node.js Step Executor",
+    "category": "开发",
+    "type": "webapp",
+    "summary": "纯前端逐步执行器，浏览器内用 acorn AST 解释运行 JavaScript",
+    "repo": "../nodejs-step-executor",
+    "managed": false,
+    "docs": "docs/nodejs-step-executor.md",
+    "note": "纯静态站点，浏览器打开 static/index.html 即可"
+}

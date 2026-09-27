@@ -1,0 +1,12 @@
+{
+    "id": "picture-frame-android",
+    "name": "Picture Frame",
+    "category": "移动",
+    "type": "android",
+    "summary": "Android 数字相框，循环展示图片",
+    "repo": "../picture-frame-android",
+    "command": ["app/build/outputs/apk/debug/app-debug.apk"],
+    "managed": false,
+    "docs": "docs/picture-frame-android.md",
+    "note": "包名 com.geno1024.pictureframe"
+}

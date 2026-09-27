@@ -1,0 +1,12 @@
+{
+    "id": "adbd-tcp",
+    "name": "ADB over TCP",
+    "category": "移动",
+    "type": "android",
+    "summary": "Android 端 ADB over TCP 工具，无线远程调试无需 USB 线",
+    "repo": "../adbd-tcp",
+    "command": ["app/build/outputs/apk/debug/adbd-tcp-v1.0-debug.apk"],
+    "managed": false,
+    "docs": "docs/adbd-tcp.md",
+    "note": "包名 com.geno1024.adbtcp；装到设备后配合 port-forwarder 使用"
+}

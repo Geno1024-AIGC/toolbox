@@ -1,0 +1,12 @@
+{
+    "id": "home-erp",
+    "name": "Home ERP",
+    "category": "生活",
+    "type": "android",
+    "summary": "家庭 ERP，管理家庭事务、物品与计划",
+    "repo": "../home-erp",
+    "command": ["./gradlew", "assembleDebug"],
+    "managed": false,
+    "docs": "docs/home-erp.md",
+    "note": "Kotlin + Gradle KTS 项目"
+}

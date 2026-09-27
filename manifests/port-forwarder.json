@@ -1,0 +1,12 @@
+{
+    "id": "port-forwarder",
+    "name": "Port Forwarder",
+    "category": "运维",
+    "type": "service",
+    "summary": "轻量 TCP 端口转发守护进程，内嵌网页管理界面",
+    "repo": "../port-forwarder",
+    "command": ["bin/port-forwarder-linux-amd64", "server"],
+    "port": 28774,
+    "healthPath": "/",
+    "docs": "docs/port-forwarder.md"
+}
